@@ -1,16 +1,22 @@
-let boxes = document.querySelector('.boxes');
-let boxli = document.querySelectorAll('.box');
+let firstbox = document.querySelectorAll('.first li');
+let secondbox = document.querySelectorAll('.second li');
 
 
-function getRandomno(max){
-    return Math.floor(Math.random() * max);
-}
-for(let i=0 ; i<boxli.)
-    let boxli = document.querySelector('.box');
-    let random = getRandomno(12); 
-    let name = document.createElement('h3');
-    name.innerText = random;
+firstbox.forEach((box,index)=> {
+    box.addEventListener("click",(event) => {
+        event.target.innerText = index + 1;
 
-    boxli.append(name);
-}
-boxli.addEventListener("click",mouseClick)
+        setTimeout(()=>{
+            event.target.innerText = "";
+        },5000)
+    })
+})
+
+secondbox.addEventListener("click",(event)=>{
+    let text = event.target.dataset.text;
+    event.target.innerText = text;
+
+    setTimeout(()=>{
+        event.target.innerText = "";
+    },5000)
+})
