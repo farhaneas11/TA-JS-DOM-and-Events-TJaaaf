@@ -30,6 +30,7 @@ footer, header, hgroup, menu, nav, section {
 }
 body {
     line-height: 1;
+    font-size: 110px;
 }
 ol, ul {
     list-style: none;
@@ -48,5 +49,16 @@ table {
 }
 *::before,*::after {
 box-sizing: border-box;
+}
+.computer { 
+    background-color: rgb(96, 123, 146);
+    color: black;
+    font-size: 90px;
+    height: 30vh;
+    display: flex;
+}
+.player { 
+    color: black;    
+    display: flex;
 }
 
