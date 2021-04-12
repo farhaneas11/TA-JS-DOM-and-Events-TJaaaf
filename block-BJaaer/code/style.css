@@ -91,3 +91,11 @@ input[type='text'] {
 .terms {
   display: inline-block;
 }
+
+/*           */
+.colors { 
+  flex-direction: column;
+}
+.nameis{
+  display: inline-block;
+}
