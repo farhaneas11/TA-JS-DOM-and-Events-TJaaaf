@@ -1,5 +1,5 @@
 let ul = document.querySelector('.wrap');
-let input = document.querySelector('#search');
+let input = document.getElementById('#search');
 
 
 let peopleAll = got.houses.reduce((acc,cv)=>{
@@ -33,10 +33,9 @@ createcards(peopleAll);
 
 function searchpeople(event){
     let searchtext = event.target.value;
-    let filtpeople = allpeople.filter((p)=>p.name.toLowerCase().inlcudes(searchtext.toLowerCase()));
-    createcards()
+    
 }
-input.addEventListener('input',searchpeople);
+input.addEventListener("input",searchpeople);
 
 
 
