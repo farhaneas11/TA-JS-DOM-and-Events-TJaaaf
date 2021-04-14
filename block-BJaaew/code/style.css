@@ -130,9 +130,11 @@ body {
    margin-top: 1rem;
  }
  .wrap li{
+   text-align: center;
   list-style-type:none;
   width: 30%;
   margin: 1%;
   height: 360;
+  background-color:cornsilk;
  }
  

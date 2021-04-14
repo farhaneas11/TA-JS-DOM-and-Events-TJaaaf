@@ -8,48 +8,36 @@ let peopleAll = got.houses.reduce((acc,cv)=>{
 },[]);
 
 
-let allpeople = peopleAll.map((person)=> {
-    return `<li>
-    <div id="characters">
-      <img src="${person.image}" alt="${person.name}">
-      <h2>${person.name}</h2>
-      <p>
-        ${person.description}
-      </p>
-      <button>
-        Know More
-      </button>
-    </div>
-  </li>`;
-});
-ul.innerHTML = allpeople.join("");
+function createcards(data =[]){
+    ul.innerHTML  = "";
+    peopleAll.forEach((person)=> {
+        let li = document.createElement('li');
+        let img = document.createElement('img');
+        img.alt = person.name;
+        img.src = person.image;
+        let h2 = document.createElement('h2');
+        h2.innerText=person.name;
+        let p = document.createElement('p');
+        p.innerText=person.description;
+        let button = document.createElement('button');
+        button.innerText = "Know More";
+        li.append(img , h2 , p , button);
 
-
-
-
-function searchpeople(){
-    let value = event.target.value;
-    peopleAll().filter((p)=>p.name);
+        ul.append(li);
+    });
+    
 }
+createcards(peopleAll);
 
 
-input.addEventListener('keyup',searchpeople);
 
-
-function peopleFilter(){
-    return got.houses.reduce((acc,house)=>{
-        acc[house.name]=house.people.map((p)=>p.name);
-        return acc;
-    },[])
+function searchpeople(event){
+    let searchtext = event.target.value;
+    let filtpeople = allpeople.filter((p)=>p.name.toLowerCase().inlcudes(searchtext.toLowerCase()));
+    createcards()
 }
+input.addEventListener('input',searchpeople);
 
- let names =document.querySelector('names');
-function displaynames(data , names){
-    data.forEach((person)=> {
-        let li = document.querySelectorAll('li');
-        li.set
-    })
-}
 
-displaynames(allpeople,names);
-names.addEventListener("click",displaynames);
+
+ 
