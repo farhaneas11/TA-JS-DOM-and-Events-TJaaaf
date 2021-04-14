@@ -1,3 +1,5 @@
+
+function main(){
 let inputText = document.querySelector('#text');
 let root = document.querySelector('ul');
 
@@ -14,26 +16,32 @@ function handleEvent(event){
         };
         allTodo.push(todo);
         event.target.value = "";
-        createUI();
+        createUI(allTodo,root);
     }    
 }
-inputText.addEventListener("keyup",handleEvent);
+
 
 function handleDelete(event){
     let id=event.target.dataset.id;
     allTodo.splice(id ,1);
-    createUI();
+    createUI(allTodo,root);
 }
 
+function handleToggle(event){
+    let id = event.target.dataset.id;
+    allTodo[id].isDone = !allTodo[id].isDone;
+    createUI(allTodo,root);
+}
 
-
-function createUI(){
-    root.innerHTML ="";
-    allTodo.forEach((todo,index)=> {
+function createUI(data,rootElm){
+    rootElm.innerHTML ="";
+    data.forEach((todo,index)=> {
         let li = document.createElement('li')
         let input = document.createElement('input');
         input.type = "checkbox";
         input.checked = todo.isDone;
+        input.setAttribute("data-id",index);
+        input.addEventListener('input',handleToggle);
         let p = document.createElement('p');
         p.innerText = todo.name;
         let span = document.createElement('button');
@@ -42,6 +50,11 @@ function createUI(){
         span.addEventListener("click",handleDelete)
 
         li.append(input , p ,span);
-        root.append(li);
+        rootElm.append(li);
     });
+}
+
+
+inputText.addEventListener("keyup",handleEvent);
+createUI(allTodo,root);
 }
