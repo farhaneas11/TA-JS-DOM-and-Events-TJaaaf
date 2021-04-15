@@ -1,8 +1,12 @@
-
 function main(){
+
 let inputText = document.querySelector('#text');
 let root = document.querySelector('ul');
 
+let all = document.querySelector('.all');
+let active = document.querySelector('.active');
+let completed = document.querySelector('.completed');
+let dlte = document.querySelector('.delete');
 
 let allTodo = [];
 
@@ -16,7 +20,7 @@ function handleEvent(event){
         };
         allTodo.push(todo);
         event.target.value = "";
-        createUI(allTodo,root);
+        createUI();
     }    
 }
 
@@ -24,17 +28,17 @@ function handleEvent(event){
 function handleDelete(event){
     let id=event.target.dataset.id;
     allTodo.splice(id ,1);
-    createUI(allTodo,root);
+    createUI();
 }
 
 function handleToggle(event){
     let id = event.target.dataset.id;
     allTodo[id].isDone = !allTodo[id].isDone;
-    createUI(allTodo,root);
+    createUI();
 }
 
-function createUI(data,rootElm){
-    rootElm.innerHTML ="";
+function createUI(data = allTodo){
+    root.innerHTML ="";
     data.forEach((todo,index)=> {
         let li = document.createElement('li')
         let input = document.createElement('input');
@@ -50,11 +54,59 @@ function createUI(data,rootElm){
         span.addEventListener("click",handleDelete)
 
         li.append(input , p ,span);
-        rootElm.append(li);
+        root.append(li);
     });
 }
 
 
 inputText.addEventListener("keyup",handleEvent);
-createUI(allTodo,root);
+createUI();
+
+let activebtn = "all";
+
+function updatebtn(btn = activebtn){
+    all.classList.remove("selected");
+    active.classList.remove("selected");
+    completed.classList.remove("selected");
+    if(btn == "all"){
+        all.classList.add("selected");
+    }
+    if(btn == "active"){
+        active.classList.add("selected");
+    }
+    if(btn == "completed"){
+        completed.classList.add("selected");
+    }
 }
+updatebtn();
+
+
+all.addEventListener("click",()=> {
+    createUI(allTodo);
+})
+
+completed.addEventListener("click",()=>{
+    let compbtn = allTodo.filter((todo)=> todo.isDone);
+    completed = "completed"
+    createUI(compbtn);
+})
+
+active.addEventListener("click",()=>{
+    let activbtn = allTodo.filter((todo)=> !todo.isDone);
+    active = "completed"
+    createUI(activbtn);
+})
+
+dlte.addEventListener("click",()=> {
+    let dltbtn = allTodo.filter((todo) => !todo.isDone );
+    dlte = "completed"
+    createUI(dltbtn);
+})
+
+
+
+
+
+}
+
+main();
