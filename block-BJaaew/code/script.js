@@ -1,55 +1,64 @@
 let ul = document.querySelector('.wrap');
 let input = document.querySelector('#search');
-
+let select = document.querySelector('.names');
 
 let peopleAll = got.houses.reduce((acc,cv)=>{
     acc = acc.concat(cv.people);
     return acc;
 },[]);
 
+let allHouse = got.houses.map((p)=>p.name);
+let activehouse = "";
 
-let allpeople = peopleAll.map((person)=> {
-    return `<li>
-    <div id="characters">
-      <img src="${person.image}" alt="${person.name}">
-      <h2>${person.name}</h2>
-      <p>
-        ${person.description}
-      </p>
-      <button>
-        Know More
-      </button>
-    </div>
-  </li>`;
-});
-ul.innerHTML = allpeople.join("");
-
-
-
-
-function searchpeople(){
-    let value = event.target.value;
-    peopleAll().filter((p)=>p.name);
-}
-
-
-input.addEventListener('keyup',searchpeople);
-
-
-function peopleFilter(){
-    return got.houses.reduce((acc,house)=>{
-        acc[house.name]=house.people.map((p)=>p.name);
-        return acc;
-    },[])
-}
-
- let names =document.querySelector('names');
-function displaynames(data , names){
-    data.forEach((person)=> {
-        let li = document.querySelectorAll('li');
-        li.set
+function createTag(tags = []){
+    select.innerHTML = "";
+    tags.forEach((tag)=>{
+        let li = document.createElement('li');
+        li.innerText = tag;
+        li.addEventListener("click",()=> {
+            activehouse = tag;
+            let peoplehouse = got.houses.find((house)=>house.name === tag ).people || [];
+            createcards(peoplehouse);
+        })
+        select.append(li);
     })
 }
+createTag(allHouse);
 
-displaynames(allpeople,names);
-names.addEventListener("click",displaynames);
+
+
+function createcards(data =[]){
+    ul.innerHTML  = "";
+    data.forEach((person)=> {
+        let li = document.createElement('li');
+        let img = document.createElement('img');
+        img.alt = person.name;
+        img.src = person.image;
+        let h2 = document.createElement('h2');
+        h2.innerText=person.name;
+        let p = document.createElement('p');
+        p.innerText=person.description;
+        let button = document.createElement('button');
+        button.innerText = "Know More";
+        li.append(img , h2 , p , button);
+
+        ul.append(li);
+    });
+    
+}
+createcards(peopleAll);
+
+
+
+function searchpeople(event){
+    let searchtext = event.target.value;
+    let filtpeople = peopleAll.filter((er) =>
+     er.name.toLowerCase().inlcudes(searchtext.toLowerCase())
+     );
+    createcards(filtpeople);
+}
+input.addEventListener("input",searchpeople);
+
+
+
+ 
