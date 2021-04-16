@@ -8,7 +8,7 @@ let active = document.querySelector('.active');
 let completed = document.querySelector('.completed');
 let dlte = document.querySelector('.delete');
 
-let allTodo = [];
+let allTodo = localStorage.getItem("Alltodos") ? JSON.parse(localStorage.getItem("Alltodos")) : [];
 
 function handleEvent(event){
     let value = event.target.value;
@@ -21,7 +21,9 @@ function handleEvent(event){
         allTodo.push(todo);
         event.target.value = "";
         createUI();
+        localStorage.setItem("Alltodos",JSON.stringify(allTodo));
     }    
+    
 }
 
 
@@ -29,12 +31,14 @@ function handleDelete(event){
     let id=event.target.dataset.id;
     allTodo.splice(id ,1);
     createUI();
+    localStorage.setItem("Alltodos",JSON.stringify(allTodo));
 }
 
 function handleToggle(event){
     let id = event.target.dataset.id;
     allTodo[id].isDone = !allTodo[id].isDone;
     createUI();
+    localStorage.setItem("Alltodos",JSON.stringify(allTodo));
 }
 
 function createUI(data = allTodo){
@@ -83,24 +87,30 @@ updatebtn();
 
 all.addEventListener("click",()=> {
     createUI(allTodo);
+    activebtn = "all";
+    updatebtn();
+    localStorage.setItem("Alltodos",JSON.stringify(allTodo));
 })
 
 completed.addEventListener("click",()=>{
     let compbtn = allTodo.filter((todo)=> todo.isDone);
-    completed = "completed"
-    createUI(compbtn);
+    activebtn = "completed"
+    createUI(compbtn);   
+    updatebtn();
 })
 
 active.addEventListener("click",()=>{
     let activbtn = allTodo.filter((todo)=> !todo.isDone);
-    active = "completed"
-    createUI(activbtn);
+    activebtn = "active"
+    createUI(activbtn);   
+    updatebtn();
 })
 
 dlte.addEventListener("click",()=> {
     let dltbtn = allTodo.filter((todo) => !todo.isDone );
-    dlte = "completed"
-    createUI(dltbtn);
+       
+    createUI();    
+    localStorage.setItem("Alltodos",JSON.stringify(allTodo));
 })
 
 
