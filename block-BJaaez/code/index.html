@@ -3,10 +3,29 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>TODO Application</title>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
+    
+    <div class="container">
+      <h1>
+        Todos
+      </h1>
+      <input 
+      id="text"
+      name="todo"
+      placeholder="What needs to  be done"
+      type="text">
+      <ul></ul>
+      <div class="buttons">
+        <button class="all">All</button>
+        <button class="active">active</button>
+        <button class="completed">completed</button>
+        <button class="delete">Clear completed</button>
+      </div>
+    </div>
     <script src="./script.js"></script>
+    <script src="manifest.json"></script>
   </body>
 </html>
