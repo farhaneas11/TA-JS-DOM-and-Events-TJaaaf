@@ -7,6 +7,37 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
+    <header>
+      <h1>CONVERTER</h1>
+    </header>
+    <main>
+      <div class="container">
+        <form class="form-size">
+          <input 
+          class="form-size"
+          id="valueno"
+          placeholder="Enter Rupees"
+          type="number">
+          <select class="form-size" id="currency-1" required>
+            <option>PLN</option>
+            <option>EUR</option>
+            <option>USD</option>
+          </select>
+          <h2>TO</h2>
+          
+          <select class="form-size" id="currency-2" required>
+            <option>EUR</option>
+            <option>USD</option>
+            <option>PLN</option>
+          </select>
+          <button>
+            Show Result
+          </button>
+        </form>       
+        
+        <span class="result"></span>
+      </div>
+    </main>
     <script src="./script.js"></script>
   </body>
 </html>
